@@ -27,20 +27,25 @@ router.post("/register", async (req, res) => {
   res.status(201).json({ message: "Usuario registrado exitosamente" });
 });
 
+// Función POST para iniciar sesión
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
+  //Validamos que el usuario se encuentre en la base de datos.
   const user = users.find((user) => user.username === username);
   if (!user) return res.status(400).json({ message: "Usuario no encontrado" });
 
+  // Validamos que la contraseña sea corecta.
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch)
     return res.status(400).json({ message: "Contraseña incorrecta" });
 
+  //Se firma el TOKEN y se asigna un tiempo
   const token = jwt.sign({ username }, process.env.JWT_SECRET, {
     expiresIn: "1h",
   });
 
+  //Regresa el token
   res.json({ token });
 });
 
