@@ -1,9 +1,19 @@
 // Importamos librerias
 const express = require("express");
 const dotenv = require("dotenv");
+const mongoose = require("mongoose");
 
 // Usamos variables de entorno dotenv
 dotenv.config();
+
+// Configurar la conexión a MongoDB
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("Conectado a MongoDB Atlas"))
+  .catch((error) => console.error("Error de conexión a MongoDB:", error));
 
 // Usamos express y retornar un json
 const app = express();
