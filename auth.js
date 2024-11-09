@@ -49,10 +49,12 @@ router.post("/login", async (req, res) => {
   res.json({ token });
 });
 
+// Función para verificar el token
 const verifyToken = (req, res, next) => {
   const token = req.headers["authorization"];
   if (!token) return res.status(403).json({ message: "Token requerido" });
 
+  // Verifica el token
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
     if (err) return res.status(401).json({ message: "Token inválido" });
     req.user = decoded;
@@ -60,8 +62,10 @@ const verifyToken = (req, res, next) => {
   });
 };
 
+// Ruta protegida
 router.get("/protected", verifyToken, (req, res) => {
   res.json({ message: `Bienvenido, ${req.user.username}! Acceso permitido.` });
 });
 
+//Exportamos el módulo
 module.exports = router;
