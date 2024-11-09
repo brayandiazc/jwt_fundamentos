@@ -2,6 +2,8 @@
 
 Este proyecto es un ejemplo básico de autenticación en Node.js utilizando **Express** y **JSON Web Token (JWT)**. Incluye rutas para registrar usuarios, iniciar sesión y acceder a una ruta protegida.
 
+👀 Existe una rama en la cual se usa [MongoDB](https://github.com/brayandiazc/jwt_fundamentos/tree/featMongo)
+
 ## Descripción del Proyecto
 
 El objetivo de este proyecto es aprender a implementar autenticación mediante JWT en un servidor Node.js. Los usuarios pueden registrarse, iniciar sesión y acceder a rutas protegidas utilizando un token.
